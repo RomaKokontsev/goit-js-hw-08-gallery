@@ -36,6 +36,10 @@ galleryRef.insertAdjacentHTML('afterbegin', creatMarkup)
 
 function onOpenModal(e) {
     e.preventDefault();
+
+    if (!e.target.classList.contains('gallery__image')) {
+    return
+  }
     
     lightbox.classList.add('is-open');
     image.src = e.target.getAttribute("data-source");
