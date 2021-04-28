@@ -8,7 +8,8 @@ const closeBtn = document.querySelector('[data-action="close-lightbox"]')
 
 
 galleryRef.addEventListener('click', onOpenModal)
-closeBtn.addEventListener('click',onCloseModal)
+closeBtn.addEventListener('click', onCloseModal)
+lightboxOverlay.addEventListener('click', onBackdropClose)
 
 
 function createGalleryMarkup(images) {
@@ -39,10 +40,26 @@ function onOpenModal(e) {
     lightbox.classList.add('is-open');
     image.src = e.target.getAttribute("data-source");
 
+    window.addEventListener('keyup', onEscapePress);
+
 }
 
 function onCloseModal() {
     lightbox.classList.remove("is-open");
     image.src = "";
+
+    window.removeEventListener('keyup', onEscapePress);
+    
+}
+
+function onBackdropClose(e) {
+    if (e.target === e.currentTarget) {
+        onCloseModal()
+     }
+}
+function onEscapePress(e) {
+    if (e.code === "Escape") {
+        onCloseModal()
+    }
 }
 
