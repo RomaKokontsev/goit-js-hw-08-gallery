@@ -7,10 +7,11 @@ const image = document.querySelector('.lightbox__image')
 const closeBtn = document.querySelector('[data-action="close-lightbox"]')
 
 
+galleryRef.addEventListener('click', onOpenModal)
+closeBtn.addEventListener('click',onCloseModal)
 
 
-
-function createGallery(images) {
+function createGalleryMarkup(images) {
     return images.map(({ preview, original, description }) => {
         return `<li class="gallery__item">
 
@@ -27,6 +28,21 @@ function createGallery(images) {
     }).join('')
 }
 
-const creatMarkup = createGallery(images)
+const creatMarkup = createGalleryMarkup(images)
+galleryRef.insertAdjacentHTML('afterbegin', creatMarkup)
 
-galleryRef.insertAdjacentHTML('afterbegin',creatMarkup )
+
+
+function onOpenModal(e) {
+    e.preventDefault();
+    
+    lightbox.classList.add('is-open');
+    image.src = e.target.getAttribute("data-source");
+
+}
+
+function onCloseModal() {
+    lightbox.classList.remove("is-open");
+    image.src = "";
+}
+
