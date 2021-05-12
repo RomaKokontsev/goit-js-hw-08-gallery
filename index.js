@@ -42,7 +42,7 @@ function onOpenModal(e) {
   }
     
     lightbox.classList.add('is-open');
-    image.src = e.target.getAttribute("data-source");
+    image.src = e.target.dataset.source;
 
     window.addEventListener('keyup', onEscapePress);
 
